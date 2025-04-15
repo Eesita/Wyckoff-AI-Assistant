@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyckoff Trading Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h5>Wyckoff Trading Assistant</h5>
+                        <p class="text-muted small">RL-Enhanced Trading Strategy</p>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" id="dashboard-tab">
+                                <i class="bi bi-graph-up"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="chatbot-tab">
+                                <i class="bi bi-chat-dots"></i> Wyckoff Assistant
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="backtest-tab">
+                                <i class="bi bi-gear"></i> Backtest Settings
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <hr>
+                    <div class="px-3">
+                        <h6 class="sidebar-heading text-muted">Recent Stocks</h6>
+                        <ul class="nav flex-column mb-2" id="recent-stocks">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-symbol="NVDA">
+                                    <i class="bi bi-bar-chart"></i> NVDA
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-symbol="AAPL">
+                                    <i class="bi bi-bar-chart"></i> AAPL
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-symbol="MSFT">
+                                    <i class="bi bi-bar-chart"></i> MSFT
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div id="dashboard-content" class="content-section">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Trading Dashboard</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="input-group me-2">
+                                <input type="text" id="stock-symbol" class="form-control" placeholder="Stock Symbol" value="NVDA">
+                                <button class="btn btn-sm btn-outline-secondary" id="load-stock-btn">Load</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h5 class="mb-0" id="chart-title">NVDA Stock Price</h5>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary" id="run-backtest-btn">Run Backtest</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="price-chart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Performance Metrics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="metrics-content">
+                                        <p class="text-center text-muted">Run a backtest to see metrics</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Trading Signals</h5>
+                                </div>
+                                <div class="card-body" id="signals-content">
+                                    <p class="text-center text-muted">Run a backtest to see trading signals</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="chatbot-content" class="content-section d-none">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Wyckoff Assistant</h1>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div id="chat-messages" class="chat-container mb-3">
+                                <div class="message system-message">
+                                    <div class="message-content">
+                                        <p>Hello! I'm your Wyckoff Trading Assistant. I can answer questions about Wyckoff methodology and help analyze trading patterns. How can I help you today?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="chat-input" class="form-control" placeholder="Ask about Wyckoff methodology...">
+                                <button class="btn btn-primary" id="send-chat-btn">
+                                    <i class="bi bi-send"></i> Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Suggested Questions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <button class="btn btn-outline-secondary w-100 text-start suggestion-btn">
+                                        What is a Spring in Wyckoff terms?
+                                    </button>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <button class="btn btn-outline-secondary w-100 text-start suggestion-btn">
+                                        What is the Wyckoff Method?
+                                    </button>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <button class="btn btn-outline-secondary w-100 text-start suggestion-btn">
+                                        Is Wyckoff analysis applicable to day trading?
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backtest-content" class="content-section d-none">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Backtest Settings</h1>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Configure Backtest Parameters</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="backtest-form">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="backtest-symbol" class="form-label">Stock Symbol</label>
+                                        <input type="text" class="form-control" id="backtest-symbol" value="NVDA">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="start-date" class="form-label">Start Date</label>
+                                        <input type="date" class="form-control" id="start-date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="end-date" class="form-label">End Date</label>
+                                        <input type="date" class="form-control" id="end-date">
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="initial-capital" class="form-label">Initial Capital</label>
+                                        <input type="number" class="form-control" id="initial-capital" value="50000">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="episodes" class="form-label">Training Episodes</label>
+                                        <input type="number" class="form-control" id="episodes" value="1000">
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <button type="submit" class="btn btn-primary w-100">Run Backtest</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Backtest Results History</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Symbol</th>
+                                                    <th>Period</th>
+                                                    <th>Initial Capital</th>
+                                                    <th>Final Value</th>
+                                                    <th>ROI</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="backtest-history">
+                                                <!-- Will be populated via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
