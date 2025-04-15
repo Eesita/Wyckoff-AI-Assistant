@@ -20,8 +20,8 @@ from utils.model_handler import WyckoffModelHandler
 app = Flask(__name__)
 
 # Initialize Wyckoff model handler with direct path to .pth file
-wyckoff_model = WyckoffModelHandler(model_path="C:/Users/sabhi/Downloads/transformer_chatbot_gpu_deco_2.pth",
-                                   data_path="c:/Users/sabhi/Downloads/Cleaned_Wyckoff_QA_Dataset.csv" )
+wyckoff_model = WyckoffModelHandler(model_path="/assets/transformer_chatbot_gpu_deco_2.pth",
+                                   data_path="/assets/Cleaned_Wyckoff_QA_Dataset.csv" )
 
 # Wyckoff Q&A endpoint
 @app.route('/api/wyckoff_chat', methods=['POST'])
