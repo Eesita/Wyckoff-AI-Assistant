@@ -1,5 +1,3 @@
-# Transformer-based-Richard-Wyckoff-Chatbot
-
 # Wyckoff Trading Assistant
 
 A comprehensive web application that combines Reinforcement Learning (RL) with Wyckoff methodology principles to assist traders in analyzing stocks and making informed trading decisions.
