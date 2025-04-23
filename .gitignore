@@ -8,9 +8,7 @@ ENV/
 
 # Model files
 *.pth
-Wyckoff_chatbot/assets/transformer_chatbot_gpu_deco_2.pth
-Wyckoff_chatbot/assets/wyckoff_model.pth
-Wyckoff_chatbot/assets/wyckoff_model_checkpoint_*.pth
+Wyckoff_chatbot/assets/*.pth
 
 # OS files
 .DS_Store
