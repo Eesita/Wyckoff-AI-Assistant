@@ -58,7 +58,7 @@ source wyckoff_venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-You can download the model file fromk [here](https://drive.google.com/file/d/1o1fCnPbczbhd7loW-b0VIxx7zEEtM4Xj/view?usp=drive_link)
+You can request the model file from [here](https://drive.google.com/file/d/1pUzpHIlY2Cf3iggzBhyBgGPnPK-ge6tg/view?usp=sharing)
 
 4. Make sure you have the model file:
 - Place your transformer model file (`transformer_chatbot_gpu_deco_2.pth`) in the correct location
