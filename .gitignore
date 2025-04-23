@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+.Python
+venv/
+ENV/
+
+# Model files
+*.pth
+Wyckoff_chatbot/assets/transformer_chatbot_gpu_deco_2.pth
+Wyckoff_chatbot/assets/wyckoff_model.pth
+Wyckoff_chatbot/assets/wyckoff_model_checkpoint_*.pth
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+
+# Misc
+get-pip.py
