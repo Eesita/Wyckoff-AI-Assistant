@@ -23,6 +23,12 @@ app = Flask(__name__)
 wyckoff_model = WyckoffModelHandler(model_path="/assets/transformer_chatbot_gpu_deco_2.pth",
                                    data_path="/assets/Cleaned_Wyckoff_QA_Dataset.csv" )
 
+# Initialize Wyckoff model handler with direct path to .pth file
+# wyckoff_model = WyckoffModelHandler(
+#     model_path="assets/wyckoff_model.pth",  # Remove the leading slash
+#     data_path="assets/Cleaned_Wyckoff_QA_Dataset.csv"  # Remove the leading slash
+# )
+
 # Wyckoff Q&A endpoint
 @app.route('/api/wyckoff_chat', methods=['POST'])
 def wyckoff_chat():
@@ -189,4 +195,4 @@ if __name__ == '__main__':
     
     # Run the Flask application
     logger.info("Starting Flask application")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
