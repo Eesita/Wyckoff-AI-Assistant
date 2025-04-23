@@ -167,10 +167,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Q-learning algorithm developed by Watkins and Dayan (1992)
 - Special thanks to the open-source communities behind Flask, PyTorch, and Chart.js
 
-## Contact
-- For questions or support, please contact:
-- Abhishek Sagar Sanda - [sabhisheksagar200@gmail.com](sabhisheksagar200@gmail.com)
-- Project Link: [SandaAbhishekSagar](https://github.com/SandaAbhishekSagar)
-- [Portfolio](https://abhisheksagar.netlify.app)
 ---
 
